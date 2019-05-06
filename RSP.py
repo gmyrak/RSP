@@ -20,14 +20,30 @@ count_comp = 0
 lb_raund = Label(text=f'Игр: {raund}', **lab_attr)
 lb_raund.pack()
 
-bt_comp_chouse = Button(text='Выбор компьютера - ?', **but_attr2)
+comp_chouse_text_none = 'Выбор компьютера - ?'
+comp_chouse_text_show = 'Комп - {}'
+comp_chouse_show = False
+
+
+def comp_chouse_press():
+    global comp_chouse_show
+    comp_chouse_show = not comp_chouse_show
+    if comp_chouse_show:
+        bt_comp_chouse.config(text=comp_chouse_text_show.format(items[comp]))
+    else:
+        bt_comp_chouse.config(text=comp_chouse_text_none)
+
+
+bt_comp_chouse = Button(text=comp_chouse_text_none, **but_attr2, command=comp_chouse_press)
 bt_comp_chouse.pack()
+
 
 buttons = Frame()
 buttons.pack()
 
 for p in range(3):
     eval(f"Button(buttons, text = items[{p}], **but_attr, command=lambda : game({p})).pack(side='left')")
+
 
 ch = Frame()
 ch.pack()
@@ -78,7 +94,9 @@ def game(player):
     lb_count_comp.config(text=count_comp)
 
     comp = comp_chouse()
-    bt_comp_chouse.config(text=items[comp])
+
+    if comp_chouse_show:
+        bt_comp_chouse.config(text=comp_chouse_text_show.format(items[comp]))
 
 
 comp = comp_chouse()
