@@ -10,6 +10,8 @@ items = 'Камень', 'Ножницы', 'Бумага'
 
 lab_attr = {'font': 'Verdana 20 bold'}
 but_attr = {'font': 'Verdana 20 bold', 'bg': 'yellow', 'border': 6, 'fg': 'blue'}
+but_attr2 = {'font': 'Verdana 20 bold', 'bg': 'white', 'border': 6, 'fg': 'blue', 'width': 20}
+
 
 raund = 0
 count_player = 0
@@ -17,6 +19,9 @@ count_comp = 0
 
 lb_raund = Label(text=f'Игр: {raund}', **lab_attr)
 lb_raund.pack()
+
+bt_comp_chouse = Button(text='Выбор компьютера - ?', **but_attr2)
+bt_comp_chouse.pack()
 
 buttons = Frame()
 buttons.pack()
@@ -42,8 +47,6 @@ lb_count_comp.grid(row=1, column=2)
 lb_winner = Label(**lab_attr)
 lb_winner.pack()
 
-ch_show_comp = Checkbutton(text='Показать ход компьютера')
-ch_show_comp.pack()
 
 def winner(a, b):
     return a - b if abs(a - b) < 2 else (b - a)//2
@@ -54,10 +57,9 @@ def comp_chouse():
 
 
 def game(player):
-    global raund, count_player, count_comp
+    global raund, count_player, count_comp, comp
 
     raund += 1
-    comp = comp_chouse()
     res = winner(player, comp)
 
     if res < 0:
@@ -75,7 +77,11 @@ def game(player):
     lb_count_player.config(text=count_player)
     lb_count_comp.config(text=count_comp)
 
+    comp = comp_chouse()
+    bt_comp_chouse.config(text=items[comp])
 
+
+comp = comp_chouse()
 win.mainloop()
 
 
