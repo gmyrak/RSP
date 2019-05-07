@@ -21,7 +21,7 @@ lb_raund = Label(text=f'Игр: {raund}', **lab_attr)
 lb_raund.pack()
 
 comp_chouse_text_none = 'Выбор компьютера - ?'
-comp_chouse_text_show = 'Комп - {}'
+comp_chouse_text_show = '{}'
 comp_chouse_show = False
 
 
@@ -34,12 +34,13 @@ def comp_chouse_press():
         bt_comp_chouse.config(text=comp_chouse_text_none)
 
 
+buttons = Frame()
+buttons.pack()
+
+
 bt_comp_chouse = Button(text=comp_chouse_text_none, **but_attr2, command=comp_chouse_press)
 bt_comp_chouse.pack()
 
-
-buttons = Frame()
-buttons.pack()
 
 for p in range(3):
     eval(f"Button(buttons, text = items[{p}], **but_attr, command=lambda : game({p})).pack(side='left')")
